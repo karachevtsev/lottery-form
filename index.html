@@ -152,19 +152,19 @@
                                     <form action="#" data-parsley-validate novalidate class="register-form">
                                         <div class="form-group">
                                             <label for="userName">Name</label>
-                                            <input type="text" name="nick" parsley-trigger="change" required placeholder="Enter user name" class="form-control register-form__name" id="userName">
+                                            <input type="text" name="nick" parsley-trigger="change" required placeholder="Enter user name" class="form-control register-form__name" id="userName" value="">
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Date of Birth</label>
-                                            <input type="text" name="date" class="form-control register-form__birth" required placeholder="mm/dd/yyyy" id="datepicker">
+                                            <input type="text" name="date" class="form-control register-form__birth" required placeholder="mm/dd/yyyy" id="datepicker" value="">
                                         </div>
                                         <div class="form-group">
                                             <label for="emailAddress">Email</label>
-                                            <input type="email" name="email" parsley-trigger="change" required placeholder="Enter email" class="form-control register-form__email" id="emailAddress">
+                                            <input type="email" name="email" parsley-trigger="change" required placeholder="Enter email" class="form-control register-form__email" id="emailAddress" value="">
                                         </div>
                                         <div class="form-group">
                                             <label>Phone number</label>
-                                            <input type="text" name="phone" placeholder="Enter Phone number" data-mask="(999) 999-9999" class="form-control register-form__phone">
+                                            <input type="text" name="phone" placeholder="Enter Phone number" data-mask="(999) 999-9999" class="form-control register-form__phone" value="">
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary waves-effect waves-light btn-save" value="addParticipant" type="submit">
@@ -191,27 +191,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="tbody-participants">
-                                           <!--  <tr>
-                                                <th scope="row">1</th>
-                                                <td>Amsterdam</td>
-                                                <td>11.04.1986</td>
-                                                <td>1@any.domain</td>
-                                                <td>(063) 999-9999</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Washington</td>
-                                                <td>17.04.1990</td>
-                                                <td>2@any.domain</td>
-                                                <td>(063) 999-9999</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Sydney</td>
-                                                <td>11.12.1991</td>
-                                                <td>3@any.domain</td>
-                                                <td>(063) 999-9999</td>
-                                            </tr> -->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -508,7 +488,7 @@
 
             </script>
 
-            <script src='app.js'></script>
+            <script type="text/javascript" src='app.js'></script>
 
 
 
