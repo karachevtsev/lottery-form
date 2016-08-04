@@ -124,16 +124,10 @@
 							<div class="col-lg-6 col-lg-offset-3">
 								<div class="card-box">
 									<div class="row">
-                                            <!-- <div class="tags-default input-group">
-                                                <input type="text" value="Amsterdam,Washington,Sydney" data-role="tagsinput" placeholder="add tags" class="form-control"/>
-                                                  <span class="input-group-btn">
-                                                    <button type="button" class="btn waves-effect waves-light btn-primary">Submit</button>
-                                                </span>
-                                            </div> -->
-                                            <div class="input-group">
-                                                <input type="text" id="winner" name="winner" class="form-control" placeholder="Winners">
+                                            <div class="input-group js-default-winner-container">
+                                                <input type="text" id="winner" name="winner" class="form-control js-default-winner-input" placeholder="Winners">
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn waves-effect waves-light btn-primary">New winner</button>
+                                                    <button type="button" class="btn waves-effect waves-light btn-primary js-winner-submit-btn">New winner</button>
                                                 </span>
                                             </div>          
 									</div>
@@ -167,7 +161,7 @@
                                             <input type="text" name="phone" placeholder="Enter Phone number" data-mask="(999) 999-9999" class="form-control register-form__phone" value="">
                                         </div>
                                         <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-primary waves-effect waves-light btn-save" value="addParticipant" type="submit">
+                                            <button class="btn btn-primary waves-effect waves-light btn-save js-form-submit-btn" value="addParticipant" type="submit">
                                                 Save
                                             </button>
                                         </div>
