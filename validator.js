@@ -1,6 +1,11 @@
 
 $(document).ready(function() {
 
+var model = [
+        //{ id: '1', name: 'Amsterdam' , date: '11.04.1986' , email: '2@any.domain<', phone: '(063) 999-9999<'},
+    ]
+
+var clickCount = 1;
 
 $('.register-form').submit(function(event) {
     processRegistration(this);
@@ -10,6 +15,7 @@ $('.register-form').submit(function(event) {
 function processRegistration(form) {
     var data = getRegistrationFormData();
     var errors = validateRegistrationData(data);
+    
 
     $('.error', $(form)).text('');
 
@@ -17,11 +23,25 @@ function processRegistration(form) {
         showErrorMessage(form, errors);
     } else {
         console.log('DATA IS VALID', data);
+        
+        var participantsList = $('.tbody-participants');
+        model.push(data);
+        console.log('Model content', model);
+
+        model.forEach(function(item) {
+            template = '<td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.birth + '</td><td>' + item.email + '</td><td>' + item.phone + '</td>';
+        })
+
+        node = document.createElement('tr');
+        node.innerHTML = template;
+        participantsList.append(node);
+
     }
 }
 
 function getRegistrationFormData() {
     var formData = {
+        id: clickCount++,
         name:  $('.register-form__name').val(),
         birth: $('.register-form__birth').val(), 
         email: $('.register-form__email').val(),       
@@ -122,7 +142,6 @@ function validateData(validationRules, data) {
     if ( Object.keys(errors).length ) {
         return errors;
     } else {
-        //взывать метод добавления данных в таблицу - добавить!!!
         $('.register-form').trigger('reset');
         return;
     }
