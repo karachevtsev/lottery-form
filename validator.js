@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
 var model = [
-        //{ id: '1', name: 'Amsterdam' , date: '11.04.1986' , email: '2@any.domain<', phone: '(063) 999-9999<'},
+    //{ id: '1', name: 'Amsterdam' , date: '11.04.1986' , email: '2@any.domain<', phone: '(063) 999-9999<'}
     ]
 
 var clickCount = 1;
@@ -14,17 +14,17 @@ $('.register-form').submit(function(event) {
 
 function processRegistration(form) {
     var data = getRegistrationFormData();
-    var errors = validateRegistrationData(data);
-    
+    var errors = validateRegistrationData(data); 
+
+    var participantsList = $('.tbody-participants'); 
 
     $('.error', $(form)).text('');
 
-    if (errors) {
-        showErrorMessage(form, errors);
-    } else {
-        console.log('DATA IS VALID', data);
-        
-        var participantsList = $('.tbody-participants');
+    data.id = clickCount;
+
+    if (!errors) {
+            clickCount++;
+            console.log('DATA IS VALID', data);
         model.push(data);
         console.log('Model content', model);
 
@@ -35,13 +35,14 @@ function processRegistration(form) {
         node = document.createElement('tr');
         node.innerHTML = template;
         participantsList.append(node);
-
+    } else {
+        showErrorMessage(form, errors);
     }
+
 }
 
 function getRegistrationFormData() {
     var formData = {
-        id: clickCount++,
         name:  $('.register-form__name').val(),
         birth: $('.register-form__birth').val(), 
         email: $('.register-form__email').val(),       
