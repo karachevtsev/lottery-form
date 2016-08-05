@@ -147,4 +147,24 @@ function validateData(validationRules, data) {
     }
 }
 
+
+//Определяем победителя
+
+var winnerSubmitBtn = document.querySelector('.js-winner-submit-btn');
+var inputDefaultWinner = document.querySelector('.js-default-winner-input');
+var defaultWinnerContainer = document.querySelector('.js-default-winner-container');
+var winnerContainer = document.querySelector('.js-winner-container');
+
+winnerSubmitBtn.addEventListener('click', function (event) {
+        if (model.length > 0) {
+            winner = model[Math.floor((Math.random() * (0.9 - 0.5) + 0.5) * model.length)]
+            inputDefaultWinner.classList.add('hide');
+            winnerNode = document.createElement('span');
+            winnerNode.setAttribute('class', "tag label label-info")
+            defaultWinnerContainer.appendChild(winnerNode);
+            winnerNode.innerHTML = winner.name;
+        }
+
+    });
+
 });
