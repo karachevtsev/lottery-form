@@ -1,79 +1,82 @@
-$(function() {
-	var LotteryList = function() {
+(function() {
 
-        this.model = [
-            { id: '1', name: 'Amsterdam' , date: '11.04.1986' , email: '2@any.domain<', phone: '(063) 999-9999<'},
-
-        ];
-
-        this.inputName        = $('.register-form__name');
-        this.inputBirth       = $('.register-form__birth');
-        this.inputEmail       = $('.register-form__email');
-        this.inputPhone       = $('.register-form__phone');
-        this.form             = $('.register-form');
-        this.participantsList = $('.tbody-participants');
-
-        this.init();
-    };
-
-    // Получить размер нашей модели - что бы знать колличество элементов на текущий момент
-    LotteryList.prototype.getLength = function() {
-        return this.model.length;
-    };
-
-    // Сгененрировать html для новой строки с элементом
-    LotteryList.prototype.getItemHtml = function (id, name, birth, email, phone) {
-        var tmpl = '<tr><th>:id</th><td>:name</td><td>:birth</td><td>:email</td><td>:phone</td><tr>';
-
-        return tmpl;
-    };
-
-    // Добавить новый элемент 
-    LotteryList.prototype.addItem = function (participantName, participantDate, participantEmail, participantPhone) {
-        var newLotteryList =  { name: participantName, date: participantDate, email: participantEmail, phone: participantPhone};
-        
-        this.model.push(newLotteryList);
-        this.appendRenderItem(this.getLength(), newLotteryList);
-    };
-
-     // Добавить в DOM новый элемент в низ списка
-    LotteryList.prototype.appendRenderItem = function () {
-        ;
-    };
-
-    // Отрендерить весь список полностью
-    LotteryList.prototype.renderList = function () {
-        var list = '',
-            __self = this;
-
-        $.each(this.model, function() {
-            list += __self.getItemHtml();
-        });
-
-        this.LotteryList.html(list);
-    };
-
-    // Hа cабмит формы добавить данные в таблицу
-    LotteryList.prototype.onFormSubmit = function (e) {
-        e.preventDefault();
-
-        this.addItem(this.inputName.val(), this.inputBirth.val(), this.inputEmail.val(), this.inputPhone.val());
-
-        
-    };
-
-    // Инициализация
-    LotteryList.prototype.init = function () {
-        var __self = this;
-
-        this.renderList();
-
-        this.form.submit(function (e) {
-            __self.onFormSubmit(e);
-        });
+    var model = [
+        //{ id: '1', name: 'Amsterdam' , date: '11.04.1986' , email: '2@any.domain<', phone: '(063) 999-9999<'},
+    ];
+    var clickCount = 1;
+    var data = {};
+    var name, date, email, phone,template, node, winner, winnerElemnt = null;
+    var isAllFieldsFilled = false;
+    var submitBtn = document.querySelector('.js-form-submit-btn');
+    var winnerSubmitBtn = document.querySelector('.js-winner-submit-btn');
+    var inputName = document.querySelector('.register-form__name');
+    var inputBirth = document.querySelector('.register-form__birth');
+    var inputEmail = document.querySelector('.register-form__email');
+    var inputPhone = document.querySelector('.register-form__phone');
+    var inputDefaultWinner = document.querySelector('.js-default-winner-input');
+    var defaultWinnerContainer = document.querySelector('.js-default-winner-container');
+    //var inputWinner = document.querySelector('.js-winner-input');
+    var winnerContainer = document.querySelector('.js-winner-container');
+    var participantsList = document.querySelector('.tbody-participants');
 
 
-    };
+    submitBtn.addEventListener('click', function (event) {
+        var fieldCounter = 0;
+        var numberOfFilled = 0;
+        event.preventDefault();
 
-    window.lottery = new LotteryList();
-});
+        name = inputName.value;
+        date = inputBirth.value;
+        email = inputEmail.value;
+        phone = inputPhone.value;
+
+        data.id = clickCount;
+        data.name = name;
+        data.date = date;
+        data.email = email;
+        data.phone = phone;
+
+        Object.keys(data).forEach(function(item) {
+            fieldCounter ++
+            if (data[item] !== '') {
+                numberOfFilled ++;
+            }
+        })
+
+
+        if (numberOfFilled === fieldCounter) {
+            isAllFieldsFilled = true;
+        } else {
+            isAllFieldsFilled = false;
+        }
+
+        if (isAllFieldsFilled) {
+            clickCount++;
+            model.push(data);
+            model.forEach(function(item) {
+                template = '<td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.date + '</td><td>' + item.email + '</td><td>' + item.phone + '</td>';
+            })
+            node = document.createElement('tr');
+            node.innerHTML = template;
+            participantsList.appendChild(node);
+        } else {
+            alert('Пожалуйста, заполните все поля!')
+        }
+
+
+
+    });
+
+    winnerSubmitBtn.addEventListener('click', function (event) {
+        if (model.length > 0) {
+            winner = model[Math.floor((Math.random() * (0.9 - 0.5) + 0.5) * model.length)]
+            inputDefaultWinner.classList.add('hide');
+            winnerNode = document.createElement('span');
+            winnerNode.setAttribute('class', "tag label label-info")
+            defaultWinnerContainer.appendChild(winnerNode);
+            winnerNode.innerHTML = winner.name;
+        }
+
+    });
+
+})();
